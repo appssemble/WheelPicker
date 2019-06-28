@@ -24,10 +24,10 @@ public enum WheelPickerStyle: Int {
 
 @objc public protocol WheelPickerDelegate: class {
     
-     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, didSelectItemAt index: Int)
-     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, marginForItem index: Int) -> CGSize
-     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, configureLabel label: UILabel, at index: Int)
-     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, configureImageView imageView: UIImageView, at index: Int)
+    @objc optional func wheelPicker(_ wheelPicker: WheelPicker, didSelectItemAt index: Int)
+    @objc optional func wheelPicker(_ wheelPicker: WheelPicker, marginForItem index: Int) -> CGSize
+    @objc optional func wheelPicker(_ wheelPicker: WheelPicker, configureLabel label: UILabel, at index: Int)
+    @objc optional func wheelPicker(_ wheelPicker: WheelPicker, configureImageView imageView: UIImageView, at index: Int)
 }
 
 public class WheelPicker: UIView {
@@ -91,7 +91,7 @@ public class WheelPicker: UIView {
             switch scrollDirection {
             case .horizontal:
                 transform.m34 = -max(min(fisheyeFactor, 1.0) ,0.0)
-
+                
             case .vertical:
                 transform.m34 = max(min(fisheyeFactor, 1.0) ,0.0)
             }
@@ -139,7 +139,7 @@ public class WheelPicker: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         
         collectionView.register(WheelPickerCell.self, forCellWithReuseIdentifier: WheelPickerCell.identifier)
-       
+        
         layer.mask = nil
         
         addSubview(collectionView)
@@ -217,7 +217,7 @@ extension WheelPicker {
         
         selectedItem = item
         collectionView.selectItem(at: IndexPath(item:item, section: 0), animated: animated, scrollPosition: scrollPosition)
-
+        
         scroll(to: item, animated)
         
         if notifySelection == true {
@@ -232,12 +232,12 @@ extension WheelPicker {
         for  index  in 0 ..< item {
             let indexPath = IndexPath(item: index, section: 0)
             let cellSize = collectionView(collectionView, layout: collectionView.collectionViewLayout, indexPath: indexPath)
-           
+            
             switch scrollDirection {
             case .horizontal:
-                 offset += cellSize.width
+                offset += cellSize.width
             case .vertical:
-                 offset += cellSize.height
+                offset += cellSize.height
             }
         }
         
@@ -293,9 +293,10 @@ extension WheelPicker {
     }
     
     fileprivate func sizeFor(_ string: String) -> CGSize {
+        
         let size =  string.size(withAttributes: [NSAttributedString.Key.font: font])
         let highlightedSize = string.size(withAttributes: [NSAttributedString.Key.font: highlightedFont])
-
+        
         return CGSize(width: ceil(max(size.width, highlightedSize.width)), height: ceil(max(size.height, highlightedSize.height)))
     }
     
@@ -303,7 +304,7 @@ extension WheelPicker {
         
         switch style {
         case .styleFlat:
-
+            
             let center = self.convert(collectionView.center, to: collectionView)
             
             if let indexPath = collectionView.indexPathForItem(at: center) {
@@ -358,7 +359,7 @@ extension WheelPicker: UICollectionViewDataSource {
         
     }
     
-   public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.numberOfItems(self) ?? 0
     }
     
@@ -416,7 +417,7 @@ extension WheelPicker: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         var size =  scrollDirection == .horizontal ? CGSize(width: interitemSpacing, height: bounds.size.height) :
-                                                     CGSize(width: bounds.size.width, height: interitemSpacing)
+            CGSize(width: bounds.size.width, height: interitemSpacing)
         
         if let title = dataSource?.titleFor?(self, at: indexPath.item) {
             
@@ -432,14 +433,14 @@ extension WheelPicker: UICollectionViewDelegateFlowLayout {
                 size.width += marginSize.width * 2
                 size.height += marginSize.height * 2
             }
-
+            
         } else if let image = dataSource?.imageFor?(self, at: indexPath.item) {
             
             switch scrollDirection {
             case .horizontal:
                 size.width += image.size.width
             case .vertical:
-                 size.height += image.size.height
+                size.height += image.size.height
             }
         }
         return size
@@ -448,7 +449,7 @@ extension WheelPicker: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         if let number = dataSource?.numberOfItems(self), number > 0 {
-    
+            
             let firstIndexPath = IndexPath(item: 0, section: 0)
             let firstSize = self.collectionView(collectionView, layout: collectionView.collectionViewLayout, indexPath: firstIndexPath)
             let lastIndexPath = IndexPath(item: number - 1, section: 0)

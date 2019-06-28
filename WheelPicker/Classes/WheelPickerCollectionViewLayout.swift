@@ -38,12 +38,12 @@ open class WheelPickerCollectionViewLayout : UICollectionViewFlowLayout {
     }
     
     override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-    
+        
         if let attributes = super.layoutAttributesForItem(at: indexPath) , let style = delegate?.pickerViewStyle(for: self) {
             
             switch style {
             case .styleFlat:
-                 return attributes
+                return attributes
             case .style3D:
                 
                 switch scrollDirection {
@@ -79,8 +79,8 @@ open class WheelPickerCollectionViewLayout : UICollectionViewFlowLayout {
                         attributes.alpha = 0.0
                     }
                 }
-
-               return attributes
+                
+                return attributes
             }
         }
         

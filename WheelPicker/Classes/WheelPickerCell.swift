@@ -9,7 +9,7 @@
 import UIKit
 
 open class WheelPickerCell : UICollectionViewCell {
-
+    
     static public let identifier = "WheelPickerCell"
     
     open var label: UILabel!
