@@ -25,6 +25,7 @@ public enum WheelPickerStyle: Int {
 @objc public protocol WheelPickerDelegate: class {
     
     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, didSelectItemAt index: Int)
+    @objc optional func wheelPicker(_ wheelPicker: WheelPicker, didChangeSelectedItemTo index: Int)
     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, marginForItem index: Int) -> CGSize
     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, configureLabel label: UILabel, at index: Int)
     @objc optional func wheelPicker(_ wheelPicker: WheelPicker, configureImageView imageView: UIImageView, at index: Int)
@@ -529,9 +530,9 @@ extension WheelPicker: UIScrollViewDelegate {
                 
                 cell.isSelected = true
                 if indexPath.row != prevIndex {
-                    
                     generateFeedback()
                     prevIndex = indexPath.row
+                    delegate?.wheelPicker?(self, didChangeSelectedItemTo: indexPath.row)
                 }
             }
             
@@ -545,6 +546,7 @@ extension WheelPicker: UIScrollViewDelegate {
                 if indexPath.row != prevIndex {
                     generateFeedback()
                     prevIndex = indexPath.row
+                    delegate?.wheelPicker?(self, didChangeSelectedItemTo: indexPath.row)
                 }
             }
         }
