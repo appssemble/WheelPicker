@@ -405,7 +405,7 @@ extension WheelPicker: UICollectionViewDataSource {
             delegate?.wheelPicker?(self, configureImageView: cell.imageView, at: indexPath.item)
         }
         
-        cell.label.font = self.font
+        cell.label.font = indexPath.item == selectedItem ? highlightedFont : font
         
         cell.isSelected = indexPath.item == selectedItem
         return cell
