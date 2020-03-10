@@ -214,6 +214,12 @@ extension WheelPicker {
     
     fileprivate func selected(_ item: Int, animated: Bool, notifySelection: Bool) {
         
+        let cells = collectionView.visibleCells
+        
+        for cell in cells {
+            (cell as? WheelPickerCell)?.current = false
+        }
+        
         let scrollPosition = scrollDirection == UICollectionView.ScrollDirection.vertical ? UICollectionView.ScrollPosition.centeredVertically : UICollectionView.ScrollPosition.centeredHorizontally
         
         selectedItem = item
