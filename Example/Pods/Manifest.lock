@@ -1,5 +1,5 @@
 PODS:
-  - WheelPicker (0.1.0)
+  - WheelPicker (1.0.0)
 
 DEPENDENCIES:
   - WheelPicker (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  WheelPicker: e2596afafcebe0c147363a2cb62dc2bafc0bf6fe
+  WheelPicker: 94fd986128b8beb4abb9effed8867e795d30416a
 
-PODFILE CHECKSUM: 9a4e8a701e3b9132f6e8d6613e51262e7edf5518
+PODFILE CHECKSUM: 64924d379f2c6588d0f6d967f4c6bf924784bb00
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.7.5

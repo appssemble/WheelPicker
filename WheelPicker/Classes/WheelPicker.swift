@@ -377,7 +377,7 @@ extension WheelPicker: UICollectionViewDataSource {
             
             cell.label.text = title
             cell.label.textColor = self.textColor
-            cell.label.highlightedTextColor = self.highlightedTextColor
+            //cell.label.highlightedTextColor = self.highlightedTextColor
             cell.label.font = self.font
             cell.font = self.font
             cell.highlightedFont = self.highlightedFont
@@ -405,9 +405,11 @@ extension WheelPicker: UICollectionViewDataSource {
             delegate?.wheelPicker?(self, configureImageView: cell.imageView, at: indexPath.item)
         }
         
-        cell.label.font = indexPath.item == selectedItem ? highlightedFont : font
+        //cell.label.font = indexPath.item == selectedItem ? highlightedFont : font
         
-        cell.isSelected = indexPath.item == selectedItem
+        cell.normalColor = self.textColor
+        cell.highlightedColor = self.highlightedTextColor
+        cell.current = false//indexPath.item == selectedItem
         return cell
     }
 }
@@ -518,7 +520,7 @@ extension WheelPicker: UIScrollViewDelegate {
         let cells = collectionView.visibleCells
         
         for cell in cells {
-            cell.isSelected = false
+            (cell as? WheelPickerCell)?.current = false
         }
         
         switch scrollDirection {
@@ -528,7 +530,7 @@ extension WheelPicker: UIScrollViewDelegate {
             
             if let indexPath = collectionView.indexPathForItem(at: CGPoint(x: x, y: collectionView.contentOffset.y)) , let cell = collectionView.cellForItem(at: indexPath) {
                 
-                cell.isSelected = true
+                (cell as? WheelPickerCell)?.current = true
                 if indexPath.row != prevIndex {
                     generateFeedback()
                     prevIndex = indexPath.row
@@ -542,7 +544,7 @@ extension WheelPicker: UIScrollViewDelegate {
             
             if let indexPath = collectionView.indexPathForItem(at: CGPoint(x: collectionView.contentOffset.x, y: y)) , let cell = collectionView.cellForItem(at: indexPath) {
                 
-                cell.isSelected = true
+                (cell as? WheelPickerCell)?.current = true
                 if indexPath.row != prevIndex {
                     generateFeedback()
                     prevIndex = indexPath.row

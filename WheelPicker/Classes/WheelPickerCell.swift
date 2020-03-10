@@ -16,6 +16,8 @@ open class WheelPickerCell : UICollectionViewCell {
     open var imageView: UIImageView!
     open var font: UIFont!
     open var highlightedFont: UIFont!
+    open var highlightedColor: UIColor!
+    open var normalColor: UIColor!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +29,7 @@ open class WheelPickerCell : UICollectionViewCell {
         label.textColor = UIColor.gray
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
-        label.highlightedTextColor = UIColor.black
+        //label.highlightedTextColor = UIColor.black
         label.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin, .flexibleBottomMargin, .flexibleRightMargin]
         contentView.addSubview(label)
         
@@ -38,7 +40,7 @@ open class WheelPickerCell : UICollectionViewCell {
         contentView.addSubview(imageView)
     }
     
-    override open var isSelected: Bool {
+    open var current: Bool! {
         didSet {
             
             if oldValue == false {
@@ -47,7 +49,8 @@ open class WheelPickerCell : UICollectionViewCell {
                 transition.duration = 0.15
                 transition.type = CATransitionType(rawValue: kCATransition)
                 label.layer.add(transition, forKey: nil)
-                label.font = isSelected ? highlightedFont : font
+                label.font = current ? highlightedFont : font
+                label.textColor = current ? highlightedColor : normalColor
             }
         }
     }
