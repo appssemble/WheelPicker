@@ -409,7 +409,7 @@ extension WheelPicker: UICollectionViewDataSource {
         
         cell.normalColor = self.textColor
         cell.highlightedColor = self.highlightedTextColor
-        cell.current = false//indexPath.item == selectedItem
+        cell.current = indexPath.item == selectedItem
         return cell
     }
 }

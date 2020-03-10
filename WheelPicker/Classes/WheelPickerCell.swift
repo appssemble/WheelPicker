@@ -40,7 +40,7 @@ open class WheelPickerCell : UICollectionViewCell {
         contentView.addSubview(imageView)
     }
     
-    open var current: Bool! {
+    open var current: Bool = false {
         didSet {
             
             if oldValue == false {
