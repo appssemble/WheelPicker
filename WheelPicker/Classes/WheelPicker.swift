@@ -213,6 +213,7 @@ extension WheelPicker {
 extension WheelPicker {
     
     fileprivate func selected(_ item: Int, animated: Bool, notifySelection: Bool) {
+        guard item != selectedItem else { return }
         
         let cells = collectionView.visibleCells
         
@@ -499,7 +500,7 @@ extension WheelPicker: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //select(indexPath.item, animated: true)
+        select(indexPath.item, animated: true)
     }
 }
 
