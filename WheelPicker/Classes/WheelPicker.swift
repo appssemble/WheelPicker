@@ -224,6 +224,7 @@ extension WheelPicker {
         
         selectedItem = item
         collectionView.selectItem(at: IndexPath(item:item, section: 0), animated: animated, scrollPosition: scrollPosition)
+        collectionView.reloadItems(at: [IndexPath(item:item, section: 0)])
         
         scroll(to: item, animated)
         
