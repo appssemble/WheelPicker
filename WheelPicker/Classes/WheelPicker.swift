@@ -499,7 +499,7 @@ extension WheelPicker: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        select(indexPath.item, animated: true)
+        //select(indexPath.item, animated: true)
     }
 }
 
